@@ -3,7 +3,7 @@ let books = require("./booksdb.js");
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
-
+const axios = require('axios');
 
 public_users.post("/register", (req,res) => {
   const username = req.body.username;
@@ -131,3 +131,50 @@ booksByTitlePromise.then((result) => {
   console.error(error);
 });
 
+const BASE_URL = 'http://localhost:5000'; // Ajusta el puerto si es diferente
+
+// Get all books from the API asynchronously
+const getAllBooks = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/`);
+    console.log("Book list:\n", response.data);
+  } catch (error) {
+    console.error("Error :", error.message);
+  }
+};
+
+// Get book details by ISBN asynchronously
+const getBookByISBN = async (isbn) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/isbn/${isbn}`);
+    console.log(`Book with ISBN ${isbn}:\n`, response.data);
+  } catch (error) {
+    console.error("Error", error.message);
+  }
+};
+
+// Get books by author asynchronously
+const getBooksByAuthor = async (author) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/author/${author}`);
+    console.log(`Author books "${author}":\n`, response.data);
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+};
+
+// Get books by title asynchronously
+const getBooksByTitle = async (title) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/title/${title}`);
+    console.log(`Books with title "${title}":\n`, response.data);
+  } catch (error) {
+    console.error("Error en Tarea 13:", error.message);
+  }
+};
+
+// Call the functions to test them
+getAllBooks();
+getBookByISBN("123456789");
+getBooksByAuthor("J.K. Rowling");
+getBooksByTitle("Harry Potter");
