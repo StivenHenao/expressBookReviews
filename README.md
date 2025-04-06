@@ -9,7 +9,7 @@ A simple Node.js + Express API for browsing books and managing reviews. Users ca
 - Search by ISBN, author, or title
 - User login with session
 - Add/update/delete reviews (authenticated)
-- Async operations using Promises
+- Async operations using Promises or Axios
 
 ## 📖 API Endpoints
 
@@ -32,6 +32,7 @@ npm start
 ```
 
 # Dependencies
+- axios
 - express
 - express-session
 - jsonwebtoken
