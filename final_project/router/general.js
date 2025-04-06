@@ -61,3 +61,73 @@ public_users.get('/review/:isbn',function (req, res) {
 });
 
 module.exports.general = public_users;
+
+// Using Promises to handle asynchronous operations
+
+// Get the book list available in the shop
+
+let allBooksPromise = new Promise((resolve, reject) => {
+  resolve(books);
+  }
+);
+
+allBooksPromise.then((result) => {
+  console.log(result);
+}).catch((error) => {
+  console.error(error);
+});
+
+// Get book details based on ISBN
+let bookDetailsPromise = new Promise((resolve, reject) => {
+  const isbn = "1";
+  if (books[isbn]) {
+    resolve(books[isbn]);
+  } else {
+    reject("Book not found");
+  }
+});
+
+bookDetailsPromise.then((result) => {
+  console.log(result);
+}).catch((error) => {
+  console.error(error);
+});
+
+// Get book details based on author
+
+let booksByAuthorPromise = new Promise((resolve, reject) => {
+  const author = "Chinua Achebe";
+  const booksByAuthor = Object.values(books).filter(book => book.author === author);
+  if (booksByAuthor.length > 0) {
+    resolve(booksByAuthor);
+  } else {
+    reject("No books found by this author");
+  }
+}
+);
+
+booksByAuthorPromise.then((result) => {
+  console.log(result);
+}).catch((error) => {
+  console.error(error);
+});
+
+// Get all books based on title
+
+let booksByTitlePromise = new Promise((resolve, reject) => {
+  const title = "Things Fall Apart";
+  const booksByTitle = Object.values(books).filter(book => book.title === title);
+  if (booksByTitle.length > 0) {
+    resolve(booksByTitle);
+  } else {
+    reject("No books found with this title");
+  }
+}
+);
+
+booksByTitlePromise.then((result) => {
+  console.log(result);
+}).catch((error) => {
+  console.error(error);
+});
+
